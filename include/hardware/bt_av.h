@@ -54,6 +54,7 @@ typedef enum {
   BTAV_A2DP_CODEC_INDEX_SOURCE_APTX,
   BTAV_A2DP_CODEC_INDEX_SOURCE_APTX_HD,
   BTAV_A2DP_CODEC_INDEX_SOURCE_LDAC,
+  BTAV_A2DP_CODEC_INDEX_SOURCE_LHDC,
 
   BTAV_A2DP_CODEC_INDEX_SOURCE_MAX,
 
@@ -130,13 +131,13 @@ typedef struct {
  *  state will have one of the values from btav_connection_state_t
  */
 typedef void (* btav_connection_state_callback)(btav_connection_state_t state,
-                                                    bt_bdaddr_t *bd_addr);
+                                                    RawAddress *bd_addr);
 
 /** Callback for audiopath state change.
  *  state will have one of the values from btav_audio_state_t
  */
 typedef void (* btav_audio_state_callback)(btav_audio_state_t state,
-                                               bt_bdaddr_t *bd_addr);
+                                               RawAddress *bd_addr);
 
 /** Callback for audio configuration change.
  *  Used only for the A2DP Source interface.
@@ -151,7 +152,7 @@ typedef void (* btav_audio_source_config_callback)(
  *  sample_rate: sample rate in Hz
  *  channel_count: number of channels (1 for mono, 2 for stereo)
  */
-typedef void (* btav_audio_sink_config_callback)(bt_bdaddr_t *bd_addr,
+typedef void (* btav_audio_sink_config_callback)(RawAddress *bd_addr,
                                                  uint32_t sample_rate,
                                                  uint8_t channel_count);
 
@@ -197,10 +198,10 @@ typedef struct {
                 std::vector<btav_a2dp_codec_config_t> codec_priorities);
 
     /** connect to headset */
-    bt_status_t (*connect)( bt_bdaddr_t *bd_addr );
+    bt_status_t (*connect)( RawAddress *bd_addr );
 
     /** dis-connect from headset */
-    bt_status_t (*disconnect)( bt_bdaddr_t *bd_addr );
+    bt_status_t (*disconnect)( RawAddress *bd_addr );
 
     /** configure the codecs settings preferences */
     bt_status_t (*config_codec)(std::vector<btav_a2dp_codec_config_t> codec_preferences);
@@ -222,10 +223,10 @@ typedef struct {
     bt_status_t (*init)( btav_sink_callbacks_t* callbacks );
 
     /** connect to headset */
-    bt_status_t (*connect)( bt_bdaddr_t *bd_addr );
+    bt_status_t (*connect)( RawAddress *bd_addr );
 
     /** dis-connect from headset */
-    bt_status_t (*disconnect)( bt_bdaddr_t *bd_addr );
+    bt_status_t (*disconnect)( RawAddress *bd_addr );
 
     /** Closes the interface. */
     void  (*cleanup)( void );

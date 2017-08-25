@@ -37,7 +37,7 @@ typedef void (*track_adv_event_callback)(
 
 /** Callback for scan results */
 typedef void (*scan_result_callback)(uint16_t event_type, uint8_t addr_type,
-                                     bt_bdaddr_t *bda, uint8_t primary_phy,
+                                     RawAddress *bda, uint8_t primary_phy,
                                      uint8_t secondary_phy,
                                      uint8_t advertising_sid, int8_t tx_power,
                                      int8_t rssi, uint16_t periodic_adv_int,
@@ -90,7 +90,7 @@ class BleScannerInterface {
                                    int company_id, int company_id_mask,
                                    const bt_uuid_t *p_uuid,
                                    const bt_uuid_t *p_uuid_mask,
-                                   const bt_bdaddr_t *bd_addr, char addr_type,
+                                   const RawAddress *bd_addr, char addr_type,
                                    std::vector<uint8_t> data,
                                    std::vector<uint8_t> p_mask,
                                    FilterConfigCallback cb) = 0;
@@ -130,6 +130,7 @@ class BleScannerInterface {
       base::Callback<void(uint16_t sync_handle, int8_t tx_power, int8_t rssi,
                           uint8_t status, std::vector<uint8_t> data)>;
   using SyncLostCb = base::Callback<void(uint16_t sync_handle)>;
+    
   virtual void StartSync(uint8_t sid, bt_bdaddr_t address, uint16_t skip,
                          uint16_t timeout, StartSyncCb start_cb,
                          SyncReportCb report_cb, SyncLostCb lost_cb) = 0;
