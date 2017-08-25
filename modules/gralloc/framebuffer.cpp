@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-#include <dlfcn.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ioctl.h>
 #include <sys/mman.h>
 
-#include <cutils/ashmem.h>
-#include <cutils/atomic.h>
-#include <log/log.h>
+#include <dlfcn.h>
 
-#include <hardware/gralloc.h>
+#include <cutils/ashmem.h>
+#include <cutils/log.h>
+
 #include <hardware/hardware.h>
+#include <hardware/gralloc.h>
+
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/ioctl.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include <cutils/log.h>
+#include <cutils/atomic.h>
 
 #ifdef __ANDROID__
 #include <linux/fb.h>
